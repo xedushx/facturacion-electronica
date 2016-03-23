@@ -5,103 +5,27 @@
  */
 package org.virtualmedic.dao;
 
+import org.virtualmedic.dto.UsuarioDTO;
+
 /**
  *
  * @author epacheco
  */
 public class UsuarioDAO {
-    private static final String NOMBRE_TABLA = "virtualmedic.vimeusuario";
-    private Integer usuCodigo;
-    private Integer prsCodigo;
-    private Integer perCodigo;
-    private String usuNombre;
-    private String usuClave;
-    private Boolean usuEstado;
-    private String usuFechaRegistro;
-    private String usuTema;
-
-    public Integer getUsuCodigo() {
-        return usuCodigo;
-    }
-
-    public void setUsuCodigo(Integer usuCodigo) {
-        this.usuCodigo = usuCodigo;
-    }
-
-    public Integer getPrsCodigo() {
-        return prsCodigo;
-    }
-
-    public void setPrsCodigo(Integer prsCodigo) {
-        this.prsCodigo = prsCodigo;
-    }
-
-    public Integer getPerCodigo() {
-        return perCodigo;
-    }
-
-    public void setPerCodigo(Integer perCodigo) {
-        this.perCodigo = perCodigo;
-    }
-
-    public String getUsuNombre() {
-        return usuNombre;
-    }
-
-    public void setUsuNombre(String usuNombre) {
-        this.usuNombre = usuNombre;
-    }
-
-    public String getUsuClave() {
-        return usuClave;
-    }
-
-    public void setUsuClave(String usuClave) {
-        this.usuClave = usuClave;
-    }
-
-    public Boolean getUsuEstado() {
-        return usuEstado;
-    }
-
-    public void setUsuEstado(Boolean usuEstado) {
-        this.usuEstado = usuEstado;
-    }
-
-    public String getUsuFechaRegistro() {
-        return usuFechaRegistro;
-    }
-
-    public void setUsuFechaRegistro(String usuFechaRegistro) {
-        this.usuFechaRegistro = usuFechaRegistro;
-    }
-
-    public String getUsuTema() {
-        return usuTema;
-    }
-
-    public void setUsuTema(String usuTema) {
-        this.usuTema = usuTema;
-    }
-
-    public UsuarioDAO() {
-    }
-
-    public UsuarioDAO(Integer usuCodigo, Integer prsCodigo, Integer perCodigo, String usuNombre, String usuClave, Boolean usuEstado, String usuFechaRegistro, String usuTema) {
-        this.usuCodigo = usuCodigo;
-        this.prsCodigo = prsCodigo;
-        this.perCodigo = perCodigo;
-        this.usuNombre = usuNombre;
-        this.usuClave = usuClave;
-        this.usuEstado = usuEstado;
-        this.usuFechaRegistro = usuFechaRegistro;
-        this.usuTema = usuTema;
-    }
     
-    public Integer crearUsuario(UsuarioDAO usuarioDAO) throws Exception{
+    public static Integer crearUsuario(UsuarioDTO usuarioDTO) throws Exception{
         Integer usuCodigoN = null;
         try {
-                        
+            StringBuilder sql = new StringBuilder();
+            sql.append("INSERT INTO ").append(UsuarioDTO.NOMBRE_TABLA).append(" ("+UsuarioDTO.CAMPOS_INSERT+") ");
+            sql.append("VALUES (").append("nextval('" + UsuarioDTO.SECUENCIA + "')");
+            sql.append(",").append(usuarioDTO.getPrsCodigo());
+            sql.append(",").append(usuarioDTO.getPerCodigo());
+            sql.append(",'").append(usuarioDTO.getUsuNombre()).append("'");
+            sql.append(",MD5('").append(usuarioDTO.getUsuClave()).append("')");
+            sql.append(",").append(usuarioDTO.getUsuEstado());
+            sql.append(",'").append(usuarioDTO.getUsuFechaRegistro()).append("'");
+            sql.append(",'").append(usuarioDTO.getUsuTema()).append("');");
         } catch (Exception e) {
             throw new Exception(e);
         }
