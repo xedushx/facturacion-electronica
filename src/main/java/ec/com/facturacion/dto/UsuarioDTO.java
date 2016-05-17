@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.virtualmedic.dto;
+package ec.com.facturacion.dto;
 
 /**
  *
  * @author epacheco
  */
 public class UsuarioDTO {
-    public static final String NOMBRE_TABLA = "virtualmedic.vimeusuario";
-    public static final String SECUENCIA = "virtualmedic.vimesecusuario";
+    public static final String NOMBRE_TABLA = "facturacionelectronica.faceusuario";
+    public static final String SECUENCIA = "facturacionelectronica.facesecusuario";
     public static final String CAMPOS_INSERT = "usucodigo,prscodigo,percodigo,usunombre,usuclave,usuestado,usufecharegistro,usutema";
     private Integer usuCodigo;
     private Integer prsCodigo;

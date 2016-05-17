@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.virtualmedic.dao;
+package ec.com.facturacion.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.http.HttpSession;
-import org.virtualmedic.beans.SessionBean;
+import ec.com.facturacion.beans.SessionBean;
  
-import org.virtualmedic.util.DataConnect;
+import ec.com.facturacion.util.DataConnect;
 
 /**
  *
@@ -25,7 +25,7 @@ public class LoginDAO {
         
         try {
             con = DataConnect.getConnection();
-            ps = con.prepareStatement("Select usucodigo, percodigo, prscodigo, usunombre from virtualmedic.vimeusuario where usunombre = ? and usuclave = MD5(?)");
+            ps = con.prepareStatement("Select usucodigo, percodigo, prscodigo, usunombre from facturacionelectronica.faceusuario where usunombre = ? and usuclave = MD5(?)");
             ps.setString(1, user);
             ps.setString(2, password);
  

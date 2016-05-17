@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.virtualmedic;
+package ec.com.facturacion;
 
 import java.io.IOException;
 import javax.inject.Named;
@@ -17,9 +17,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
-import org.virtualmedic.beans.SessionBean;
+import ec.com.facturacion.beans.SessionBean;
  
-import org.virtualmedic.dao.LoginDAO;
+import ec.com.facturacion.dao.LoginDAO;
 
 /**
  *
@@ -31,7 +31,8 @@ import org.virtualmedic.dao.LoginDAO;
 public class Login implements Serializable {
 
     private static final long serialVersionUID = 1094801825228386363L;
-     
+    private String version = "1.0-SNAPSHOT";
+    
     private String pwd;
     private String msg;
     private String user;
@@ -59,9 +60,17 @@ public class Login implements Serializable {
     public void setUser(String user) {
         this.user = user;
     }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
  
     //validate login
-    public void validateUsernamePassword(ActionEvent actionEvent) {
+    public String validateUsernamePassword(ActionEvent actionEvent) {
         boolean valid = LoginDAO.validate(user, pwd);
         if (valid) {
             try {
@@ -69,27 +78,27 @@ public class Login implements Serializable {
             } catch (IOException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-//            return "principal";
+            return "principal";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                             "Usuario o Clave Incorrectos",
                             "Por favor ingrese su usuario y clave nuevamente"));
-//            return "login";
+            return "login";
         }
     }
  
     //logout event, invalidate session
-    public void logout() {
+    public String logout() {
         HttpSession session = SessionBean.getSession();
         session.invalidate();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/virtualmedic/faces/login.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/facturacion-electronica/faces/login.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        return "login";
+        return "login";
     }
     
 }

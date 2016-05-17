@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.virtualmedic.dao;
+package ec.com.facturacion.dao;
 
 /**
  *
  * @author epacheco
  */
-public class PersonaDAO {
+public class PerfilDAO {
     
 }
